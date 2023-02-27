@@ -1,0 +1,222 @@
+[
+  {
+    "id": 1,
+    "car_brand": "Audi",
+    "model": "A4 TDI",
+    "year": 2021,
+    "engine_type": "Disel",
+    "power": 110,
+    "gear": "Automatic",
+    "color": "Black",
+    "image": "https://images.carexpert.com.au/crop/800/500/vehicles/source-g/0/4/0457a99d.jpg"
+  },
+  {
+    "id": 2,
+    "car_brand": "Audi",
+    "model": "A6 TDI",
+    "year": 2022,
+    "engine_type": "Disel",
+    "power": 150,
+    "gear": "automatic",
+    "color": "black",
+    "image": "https://cdn.carbuzz.com/gallery-images/2023-audi-a6-carbuzz-910291.jpg"
+  },
+{
+  "id": 3,
+  "car_brand": "Mercedes-Benz",
+  "model": "S500",
+  "year": 2022,
+  "engine_type": "Petrol",
+  "power": 320,
+  "gear": "Automatic",
+  "color": "Obsidian Black",
+  "image": "https://hips.hearstapps.com/hmg-prod/images/2022-mercedes-benz-s500-4matic-101-1642184014.jpg?crop=0.804xw:0.603xh;0.107xw,0.238xh&resize=1200:*"
+},
+{
+  "id": 4,
+  "car_brand": "Mercedes-Benz",
+  "model": "C 220",
+  "year": 2022,
+  "engine_type": "Disel",
+  "power": 150,
+  "gear": "Automatic",
+  "color": "Polar White",
+  "image": "https://automania.hr/wp-content/uploads/2022/09/amg-1-899x506.jpg"
+},
+{
+  "id": 5,
+  "car_brand": "BMW",
+  "model": "530d",
+  "year": 2020,
+  "engine_type": "Disel",
+  "power": 210,
+  "gear": "automatic",
+  "color": "Metalic Blue",
+  "image": "https://cdn.carbuzz.com/gallery-images/2020-bmw-m5-sedan-carbuzz-390280.jpg"
+},
+{
+  "id": 6,
+  "car_brand": "BMW",
+  "model": "120d",
+  "year": 2021,
+  "engine_type": "Disel",
+  "power": 110,
+  "gear": "Manual",
+  "color": "White",
+  "image": "https://www.larevueautomobile.com/images/fiche-technique/2021/Bmw/Serie-1/Bmw_Serie-1_MD_1.jpg"
+},
+{
+  "id": 7,
+  "car_brand": "Honda",
+  "model": "Civic",
+  "year": 2022,
+  "engine_type": "Petrol",
+  "power": 135,
+  "gear": "Manual",
+  "color": "Yellow",
+  "image": "https://www.tportal.hr/media/thumbnail/w1000/1183386.jpeg"
+},
+{
+  "id": 8,
+  "car_brand": "Honda",
+  "model": "Acord",
+  "year": 2022,
+  "engine_type": "Petrol",
+  "power": 162,
+  "gear": "Automatic",
+  "color": "Red",
+  "image": "https://hondapros.com/wp-content/uploads/2020/06/2021-Honda-Accord-Type-R-1024x575.jpg"
+},
+{
+  "id": 9,
+  "car_brand": "Toyota",
+  "model": "C-HR Hybrid",
+  "year": 2022,
+  "engine_type": "Petrol",
+  "power": 90,
+  "gear": "Manual",
+  "color": "Black",
+  "image": "https://www.elcarrocolombiano.com/wp-content/uploads/2022/08/20220808-TOYOTA-C-HR-2023-PORTADA.jpg"
+},
+{
+  "id": 10,
+  "car_brand": "Toyota",
+  "model": "Corolla Hybrid",
+  "year": 2022,
+  "engine_type": "Petrol",
+  "power": 97,
+  "gear": "Manual",
+  "color": "Metalic Grey",
+  "image": "https://images.carexpert.com.au/crop/1200/630/app/uploads/2021/12/2022-Toyota-Corolla-ZR-Hybrid_HERO.jpg"
+},
+{
+  "id": 11,
+  "car_brand": "Mazda",
+  "model": "3",
+  "year": 2022,
+  "engine_type": "Petrol",
+  "power": 137,
+  "gear": "Automatic",
+  "color": "Red",
+  "image": "http://www.impexta.com/wp-content/uploads/2015/02/Mazda-3-2019-1600-6f_result.jpg"
+},
+{
+  "id": 12,
+  "car_brand": "Mazda",
+  "model": "CX-5",
+  "year": 2021,
+  "engine_type": "Petrol",
+  "power": 121,
+  "gear": "Manual",
+  "color": "Red",
+  "image": "https://ams.hr/wp-content/uploads/2022/03/Mazda-cx-5-845x475-c-default.jpg"
+},
+{
+  "id": 13,
+  "car_brand": "Peugeot",
+  "model": "508",
+  "year": 2022,
+  "engine_type": "Disel",
+  "power": 110,
+  "gear": "Automatic",
+  "color": "Red",
+  "image": "https://images.drive.com.au/driveau/image/upload/c_fill,f_auto,g_auto,h_674,q_auto:eco,w_1200/cms/uploads/7KJrJjduQyCiFClG4iIc"
+},
+{
+  "id": 14,
+  "car_brand": "Peugeot",
+  "model": "308",
+  "year": 2022,
+  "engine_type": "Disel",
+  "power": 96,
+  "gear": "Manual",
+  "color": "Metalic Green",
+  "image": "https://transportmagazin.hr/system/wp-content/uploads/2022/02/Peugeot-308-wwcoty.jpg"
+},
+{
+  "id": 15,
+  "car_brand": "Renault",
+  "model": "Talisman",
+  "year": 2020,
+  "engine_type": "Disel",
+  "power": 96,
+  "gear": "Automatic",
+  "color": "Cosmos Blue",
+  "image": "https://imgr1.auto-motor-und-sport.de/Renault-Talisman-Grandtour-fotoshowBig-ecfaac59-891112.jpg"
+},
+{
+  "id": 16,
+  "car_brand": "Renault",
+  "model": "Megane Conquest",
+  "year": 2022,
+  "engine_type": "Diesel",
+  "power": 84,
+  "gear": "Manual",
+  "color": "Valencia Orange",
+  "image": "https://automania.hr/wp-content/uploads/2021/06/me-1.jpg"
+},
+{
+  "id": 17,
+  "car_brand": "KIA",
+  "model": "X-CEED",
+  "year": 2022,
+  "engine_type": "Petrol",
+  "power": 110,
+  "gear": "Manual",
+  "color": "Black",
+  "image": "https://media.autoexpress.co.uk/image/private/s--X-WVjvBW--/f_auto,t_content-image-full-desktop@1/v1666353404/autoexpress/2022/10/Kia%20XCeed%20PHEV%202022%20UK-22.jpg"
+},
+{
+  "id": 18,
+  "car_brand": "KIA",
+  "model": "Colorano Springs",
+  "year": 2021,
+  "engine_type": "Petrol",
+  "power": 110,
+  "gear": "Manual",
+  "color": "Grey",
+  "image": "https://di-uploads-pod20.dealerinspire.com/edvoyleskia1/uploads/2020/07/Untitled-design-2020-07-14T153824.223-1024x576.png"
+},
+{
+  "id": 19,
+  "car_brand": "Hyundai",
+  "model": "i30N",
+  "year": 2022,
+  "engine_type": "Petrol",
+  "power": 202,
+  "gear": "Automatic",
+  "color": "Grey",
+  "image": "https://media.kleinezeitung.at/images/thumb/800x400/focal0x0-0x0/1/f/d/5505533/8f2f0775-2220-49d8-a806-9f383522729b_1538341131820863_v0_h.jpg"
+},
+{
+  "id": 20,
+  "car_brand": "Hyundai",
+  "model": "Tucson",
+  "year": 2022,
+  "engine_type": "Diesel",
+  "power": 115,
+  "gear": "Manual",
+  "color": "Green",
+  "image": "https://assets-eu-01.kc-usercontent.com/3b3d460e-c5ae-0195-6b86-3ac7fb9d52db/41a728d8-6c4f-41f2-b799-ac632dfa2562/Hyundai%20Tucson%20%285%29.jpg?width=800&fm=jpg&auto=format"
+}
+]
