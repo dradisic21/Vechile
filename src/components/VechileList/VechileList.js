@@ -1,29 +1,52 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import data from "../data.json";
 import "./VechileList.css";
-import AddVechileForm from '../VechileForm/AddVechileForm';
+import AddVechileForm from "../VechileForm/AddVechileForm";
 
 function VechileList() {
   const [vechiles, setVechiles] = useState([]);
   const [error, setError] = useState("");
   const [showForm, setShowForm] = useState(false);
-  const navigate = useNavigate();
-  
-
+  const [showScrollBtn, setShowScrollBtn] = useState(false);
 
   useEffect(() => {
     setVechiles(data);
   }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.pageYOffset > 400) {
+        setShowScrollBtn(true);
+      } else {
+        setShowScrollBtn(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   const handleDelete = (id) => {
     const updatedVechiles = vechiles.filter((vechile) => vechile.id !== id);
     setVechiles(updatedVechiles);
   };
 
+const handleEdit = (id) => {
+  console.log('editirao sam')
+}
+
   const toggleForm = () => {
-    setShowForm(!showForm);
+   setShowForm(!showForm);
   };
 
   return (
@@ -33,13 +56,25 @@ function VechileList() {
           <h1>Cars Page List</h1>
         </div>
         <div className="btnPosition">
-          <button className="createBtn" onClick={toggleForm}>Create Vechile</button>
+          <button className="createBtn" onClick={toggleForm}>
+            Create Vechile
+          </button>
         </div>
       </div>
+
+      {showScrollBtn && (
+        <div className="scroll-position">
+          <div className="scroll" onClick={scrollToTop}>
+            <i className="material-icons">arrow_upward</i>
+          </div>
+        </div>
+      )}
       {showForm && (
-      <div>
-        <AddVechileForm />
-      </div>)}
+        <div>
+          <AddVechileForm />
+        </div>
+      )}
+
       {error ? (
         <div>{error}</div>
       ) : (
@@ -55,8 +90,15 @@ function VechileList() {
                   />
                 </div>
                 <div className="icons">
-                <i className="material-icons" onClick={() => handleDelete(vechile.id)}>delete</i>
-                <i className="material-icons">edit</i>
+                  <i
+                    className="material-icons"
+                    onClick={() => handleDelete(vechile.id)}
+                  >
+                    delete
+                  </i>
+                  <i className="material-icons"
+                  onClick={() => handleEdit(vechile.id)}
+                  >edit</i>
                 </div>
                 <div className="description">
                   <p className="title">
@@ -76,15 +118,14 @@ function VechileList() {
                       <i className="material-icons">bolt</i> Power:{" "}
                       {vechile.power} kW
                     </p>
-                      <p>
-                        <i className="material-icons">settings</i> 
-                        Transmition:{" "}
-                        {vechile.gear}
-                      </p>
-                      <p>
-                        <i className="material-icons">palette</i> Color:{" "}
-                        {vechile.color}
-                      </p>
+                    <p>
+                      <i className="material-icons">settings</i>
+                      Transmition: {vechile.gear}
+                    </p>
+                    <p>
+                      <i className="material-icons">palette</i> Color:{" "}
+                      {vechile.color}
+                    </p>
                   </div>
                 </div>
               </div>
