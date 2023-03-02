@@ -101,7 +101,7 @@ i {
 .scroll-position {
   position: fixed;
   top: 750px;
-  right: 15px;
+  right: 5px;
 }
 .scroll {
   position: relative;

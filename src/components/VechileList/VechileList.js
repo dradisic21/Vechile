@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import data from "../data.json";
-import "./VechileList.css";
 import AddVechileForm from "../VechileForm/AddVechileForm";
+import UpdateVechilePopUp from "../UpdateVechile/UpdateVechilePopUp";
+import Button from "../../UI/Button/Button";
+import "./VechileList.css";
 
 function VechileList() {
   const [vechiles, setVechiles] = useState([]);
   const [error, setError] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [showScrollBtn, setShowScrollBtn] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     setVechiles(data);
@@ -41,12 +44,12 @@ function VechileList() {
     setVechiles(updatedVechiles);
   };
 
-const handleEdit = (id) => {
-  console.log('editirao sam')
-}
+  const showAddForm = () => {
+    setShowForm(!showForm);
+  };
 
-  const toggleForm = () => {
-   setShowForm(!showForm);
+  const togglePopUp = () => {
+    setIsOpen(!isOpen);
   };
 
   return (
@@ -56,11 +59,19 @@ const handleEdit = (id) => {
           <h1>Cars Page List</h1>
         </div>
         <div className="btnPosition">
-          <button className="createBtn" onClick={toggleForm}>
-            Create Vechile
-          </button>
+          <Button
+            className="createBtn"
+            onClick={showAddForm}
+            name="Create Vechile"
+          />
         </div>
       </div>
+
+      {isOpen && (
+        <div>
+          <UpdateVechilePopUp handleClose={togglePopUp} />
+        </div>
+      )}
 
       {showScrollBtn && (
         <div className="scroll-position">
@@ -69,6 +80,7 @@ const handleEdit = (id) => {
           </div>
         </div>
       )}
+
       {showForm && (
         <div>
           <AddVechileForm />
@@ -96,9 +108,9 @@ const handleEdit = (id) => {
                   >
                     delete
                   </i>
-                  <i className="material-icons"
-                  onClick={() => handleEdit(vechile.id)}
-                  >edit</i>
+                  <i className="material-icons" onClick={() => togglePopUp()}>
+                    edit
+                  </i>
                 </div>
                 <div className="description">
                   <p className="title">
