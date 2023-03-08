@@ -1,9 +1,9 @@
 import React from "react";
-import "./UpdateVechilePopUp.css"
+import "./UpdateVehiclePopUp.css"
 import Input from "../../UI/Input/Input";
 import Button from "../../UI/Button/Button"
 
-function UpdateVechilePopUp(props) {
+function UpdateVehiclePopUp(props) {
     return (
         <div className="pop-up-content">
             <div className="box">
@@ -26,4 +26,4 @@ function UpdateVechilePopUp(props) {
     )
 }
 
-export default UpdateVechilePopUp;
+export default UpdateVehiclePopUp;

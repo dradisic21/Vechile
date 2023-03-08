@@ -1,0 +1,45 @@
+.login-container {
+    width: 100%;
+    max-width: 1920px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin: auto;
+    background-color: rgb(249, 249, 249);
+}
+.login-form {
+    margin: auto;
+    width: 100%;
+    max-width: 700px;
+    height: 550px;
+    border: 1px solid #ccc;
+    position: relative;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+      rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+      rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+}
+.text-form {
+    display: flex;
+    justify-content: center;
+    font-size: 44px;
+    font-weight: bold;
+    margin-top: 80px;
+}
+.input-form {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+.button-form {
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+}
+.text-danger { 
+    font-size: 13px;
+    color: red;
+    margin-left: 0;
+}

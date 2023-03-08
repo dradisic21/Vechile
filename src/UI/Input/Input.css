@@ -10,5 +10,6 @@ input {
     outline-color: black;
   }
   label {
+    padding-top: 20px;
     font-size: 16px;
   }

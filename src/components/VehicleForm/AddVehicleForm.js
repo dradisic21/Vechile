@@ -1,9 +1,9 @@
 import React from "react";
-import "./AddVechileForm.css";
+import "./AddVehicleForm.css";
 import Input from "../../UI/Input/Input";
 import Button from "../../UI/Button/Button"
 
-function AddVechileForm() {
+function AddVehicleForm() {
   return (
     <div className="form-content">
       <form className="add-vechile-form">
@@ -21,4 +21,4 @@ function AddVechileForm() {
   );
 }
 
-export default AddVechileForm;
+export default AddVehicleForm;

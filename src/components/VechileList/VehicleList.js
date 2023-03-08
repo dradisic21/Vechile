@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
 import data from "../data.json";
-import AddVechileForm from "../VechileForm/AddVechileForm";
-import UpdateVechilePopUp from "../UpdateVechile/UpdateVechilePopUp";
+import AddVehicleForm from "../VehicleForm/AddVehicleForm";
+import UpdateVehiclePopUp from "../UpdateVehicle/UpdateVehiclePopUp";
 import Button from "../../UI/Button/Button";
-import "./VechileList.css";
+import "./VehicleList.css";
 
-function VechileList() {
-  const [vechiles, setVechiles] = useState([]);
+function VehicleList() {
+  const [vehicles, setVehicles] = useState([]);
   const [error, setError] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [showScrollBtn, setShowScrollBtn] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    setVechiles(data);
+    setVehicles(data);
+    // fetch VehicleServices
   }, []);
 
   useEffect(() => {
@@ -40,8 +41,8 @@ function VechileList() {
   };
 
   const handleDelete = (id) => {
-    const updatedVechiles = vechiles.filter((vechile) => vechile.id !== id);
-    setVechiles(updatedVechiles);
+    const updatedVehicles = vehicles.filter((vehicle) => vehicle.id !== id);
+    setVehicles(updatedVehicles);
   };
 
   const showAddForm = () => {
@@ -69,7 +70,7 @@ function VechileList() {
 
       {isOpen && (
         <div>
-          <UpdateVechilePopUp handleClose={togglePopUp} />
+          <UpdateVehiclePopUp handleClose={togglePopUp} />
         </div>
       )}
 
@@ -83,7 +84,7 @@ function VechileList() {
 
       {showForm && (
         <div>
-          <AddVechileForm />
+          <AddVehicleForm />
         </div>
       )}
 
@@ -91,12 +92,12 @@ function VechileList() {
         <div>{error}</div>
       ) : (
         <div className="screen_content">
-          {vechiles.map((vechile) => {
+          {vehicles.map((vehicle) => {
             return (
-              <div key={vechile.id} className="card">
+              <div key={vehicle.id} className="card">
                 <div className="image_postion">
                   <img
-                    src={vechile.image}
+                    src={vehicle.image}
                     alt="car"
                     className="image-vechile-list"
                   />
@@ -104,7 +105,7 @@ function VechileList() {
                 <div className="icons">
                   <i
                     className="material-icons"
-                    onClick={() => handleDelete(vechile.id)}
+                    onClick={() => handleDelete(vehicle.id)}
                   >
                     delete
                   </i>
@@ -114,29 +115,29 @@ function VechileList() {
                 </div>
                 <div className="description">
                   <p className="title">
-                    {vechile.car_brand} {vechile.model}
+                    {vehicle.car_brand} {vehicle.model}
                   </p>
                   <p className="subtitle">Features</p>
                   <div className="features">
                     <p>
                       <i className="material-icons">calendar_month</i> Year:{" "}
-                      {vechile.year}
+                      {vehicle.year}
                     </p>
                     <p>
                       <i className="material-icons">local_gas_station</i> Engyne
-                      type: {vechile.engine_type}
+                      type: {vehicle.engine_type}
                     </p>
                     <p>
                       <i className="material-icons">bolt</i> Power:{" "}
-                      {vechile.power} kW
+                      {vehicle.power} kW
                     </p>
                     <p>
                       <i className="material-icons">settings</i>
-                      Transmition: {vechile.gear}
+                      Transmition: {vehicle.gear}
                     </p>
                     <p>
                       <i className="material-icons">palette</i> Color:{" "}
-                      {vechile.color}
+                      {vehicle.color}
                     </p>
                   </div>
                 </div>
@@ -149,4 +150,4 @@ function VechileList() {
   );
 }
 
-export default VechileList;
+export default VehicleList;

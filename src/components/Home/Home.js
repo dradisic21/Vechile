@@ -6,7 +6,7 @@ function Home() {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate("/vechilelist");
+        navigate("/login");
       };
 
   return (
@@ -40,9 +40,9 @@ function Home() {
             <path
               d="M1 8H15M15 8L8 1M15 8L8 15"
               stroke="white"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
         </button>
