@@ -4,6 +4,7 @@ import Input from "../../UI/Input/Input";
 import Button from "../../UI/Button/Button"
 
 function AddVehicleForm() {
+  
   return (
     <div className="form-content">
       <form className="add-vechile-form">

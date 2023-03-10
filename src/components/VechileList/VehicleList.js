@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import data from "../data.json";
+import {getAllVehicleData} from "../../VehicleServices";
 import AddVehicleForm from "../VehicleForm/AddVehicleForm";
 import UpdateVehiclePopUp from "../UpdateVehicle/UpdateVehiclePopUp";
 import Button from "../../UI/Button/Button";
+import {deleteVehicle} from "../../VehicleApi.js"
 import "./VehicleList.css";
 
 function VehicleList() {
@@ -12,9 +13,18 @@ function VehicleList() {
   const [showScrollBtn, setShowScrollBtn] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
+  // get Vehicle
   useEffect(() => {
-    setVehicles(data);
-    // fetch VehicleServices
+    const getVehicles = async () => {
+      try {
+        const vehicles = await getAllVehicleData();
+        setVehicles(vehicles);
+      } catch (err) {
+        setError(err);
+      } finally {
+      }
+    };
+    getVehicles();
   }, []);
 
   useEffect(() => {
@@ -33,6 +43,7 @@ function VehicleList() {
     };
   }, []);
 
+  // scrool page to top 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -40,15 +51,22 @@ function VehicleList() {
     });
   };
 
-  const handleDelete = (id) => {
-    const updatedVehicles = vehicles.filter((vehicle) => vehicle.id !== id);
-    setVehicles(updatedVehicles);
-  };
+// delete item
+  const handleDelete = async (vehicleId) => {
+    try {
+      const response = await deleteVehicle(vehicleId); 
+      console.log(response.data); 
+    } catch (error) {
+      console.error(error); 
+    }
+  }
 
+  // show the add form
   const showAddForm = () => {
     setShowForm(!showForm);
   };
 
+   // update item pop up 
   const togglePopUp = () => {
     setIsOpen(!isOpen);
   };
@@ -133,7 +151,7 @@ function VehicleList() {
                     </p>
                     <p>
                       <i className="material-icons">settings</i>
-                      Transmition: {vehicle.gear}
+                      Transmission: {vehicle.transmission}
                     </p>
                     <p>
                       <i className="material-icons">palette</i> Color:{" "}

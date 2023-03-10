@@ -31,7 +31,7 @@ export async function login(username, password, grantType = 'password') {
     });
 }
 
-//VehicleMake
+//POST VehicleMake
 
 export async function VehicleMake() {
   const userToken = JSON.parse(localStorage.getItem("userToken")).access_token;
@@ -55,7 +55,7 @@ export async function VehicleMake() {
 return response;
 }
 
-//VehicleMake
+//POST VehicleMake
 
 export async function VehicleModel() {
   const userToken = JSON.parse(localStorage.getItem("userToken")).access_token;
@@ -79,7 +79,7 @@ export async function VehicleModel() {
 return response;
 }
 
-//Vehicle
+//POST Vehicle
 
 export async function Vehicle() {
   const userToken = JSON.parse(localStorage.getItem("userToken")).access_token;
@@ -103,3 +103,98 @@ export async function Vehicle() {
 return response;
 }
 
+
+//GET VehicleMake
+
+export async function getVehicleMake() {
+  const userToken = JSON.parse(localStorage.getItem("userToken")).access_token;
+
+  const requestOptions = {
+    method: "POST", 
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + userToken,
+    },
+  
+  };
+  const response = await axios
+  .get("https://api.baasic.com/v1/vehicle-cro23/resources/VehicleMake", requestOptions)
+  .catch(function (error) {
+    if (error.response) {
+      console.log(error.response);
+    }
+    throw error;
+  });
+return response;
+}
+
+//GET VehicleMake
+
+export async function getVehicleModel() {
+  const userToken = JSON.parse(localStorage.getItem("userToken")).access_token;
+
+  const requestOptions = {
+    method: "GET", 
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + userToken,
+    },
+  
+  };
+  const response = await axios
+  .get("https://api.baasic.com/v1/vehicle-cro23/resources/VehicleModel", requestOptions)
+  .catch(function (error) {
+    if (error.response) {
+      console.log(error.response);
+    }
+    throw error;
+  });
+return response;
+}
+
+//GET Vehicle
+
+export async function getVehicle() {
+  const userToken = JSON.parse(localStorage.getItem("userToken")).access_token;
+
+  const requestOptions = {
+    method: "GET", 
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + userToken,
+    },
+  
+  };
+  const response = await axios
+  .get("https://api.baasic.com/v1/vehicle-cro23/resources/Vehicle", requestOptions)
+  .catch(function (error) {
+    if (error.response) {
+      console.log(error.response);
+    }
+    throw error;
+  });
+return response;
+}
+
+
+//Delete item 
+
+export async function deleteVehicle(vehicleId) {
+ 
+  const requestOptions = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  const response = await axios
+    .delete(`https://api.baasic.com/v1/vehicle-cro23/resources/Vehicle/${vehicleId}`, requestOptions)
+    .catch(function (error) {
+      if (error.response) {
+        console.log(error.response);
+      }
+      throw error;
+    });
+  
+  return response;
+}
