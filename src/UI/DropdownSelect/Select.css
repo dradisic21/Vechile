@@ -1,0 +1,22 @@
+select {
+    width: 400px;
+    height: 40px;
+    border: 1px solid rgb(218, 218, 218);
+    border-radius: 5px;
+    margin-top: 5px;
+    padding-left: 10px;
+    cursor: pointer;
+  }
+  select:focus {
+    outline-color: black;
+  }
+  select:active {
+    background-color: #f0f0f0 !important;
+  }
+  label {
+    padding-top: 20px;
+    font-size: 16px;
+  }
+  .select-form {
+    margin-top: 20px;
+  }

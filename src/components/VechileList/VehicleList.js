@@ -1,31 +1,56 @@
 import React, { useState, useEffect } from "react";
-import {getAllVehicleData} from "../../VehicleServices";
+import { getAllVehicleData } from "../../Services/VehicleServices";
 import AddVehicleForm from "../VehicleForm/AddVehicleForm";
 import UpdateVehiclePopUp from "../UpdateVehicle/UpdateVehiclePopUp";
 import Button from "../../UI/Button/Button";
-import {deleteVehicle} from "../../VehicleApi.js"
+import { deleteVehicle } from "../../Services/VehicleApi.js";
 import "./VehicleList.css";
 
 function VehicleList() {
+  const [refresh, setRefresh] = useState(true);
   const [vehicles, setVehicles] = useState([]);
+  const [selectedVehicle, setSelectedVehicle] = useState(null);
   const [error, setError] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [showScrollBtn, setShowScrollBtn] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [vehicleMakeMap, setVehicleMakeMap] = useState({});
+  const [vehicleModelMap, setVehicleModelMap] = useState({});
 
   // get Vehicle
   useEffect(() => {
     const getVehicles = async () => {
       try {
-        const vehicles = await getAllVehicleData();
-        setVehicles(vehicles);
+        const vehicleData = await getAllVehicleData();
+        setVehicles(vehicleData.vehicles);
+        setVehicleMakeMap(vehicleData.vehicleMakeMap);
+        setVehicleModelMap(vehicleData.vehicleModelMap);
       } catch (err) {
         setError(err);
       } finally {
+        setRefresh(false);
       }
     };
-    getVehicles();
-  }, []);
+    if(refresh === true) {
+      getVehicles();
+    }
+  }, [refresh]);
+
+    const handleUpdate = () => {
+      setRefresh(true);
+    } 
+  // delete item
+
+    const handleDelete = async (vehicleId) => {
+      try {
+        const response = await deleteVehicle(vehicleId);
+        console.log(response.data);
+        setVehicles(vehicles.filter(vehicle => vehicle.id !== vehicleId));
+      } catch (error) {
+        console.error(error);
+      }
+    };
+ 
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,7 +68,7 @@ function VehicleList() {
     };
   }, []);
 
-  // scrool page to top 
+  // scrool page to top
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -51,25 +76,17 @@ function VehicleList() {
     });
   };
 
-// delete item
-  const handleDelete = async (vehicleId) => {
-    try {
-      const response = await deleteVehicle(vehicleId); 
-      console.log(response.data); 
-    } catch (error) {
-      console.error(error); 
-    }
-  }
-
   // show the add form
   const showAddForm = () => {
     setShowForm(!showForm);
   };
 
-   // update item pop up 
-  const togglePopUp = () => {
+  // update item pop up
+  const togglePopUp = (vehicle) => {
+    setSelectedVehicle(vehicle);
     setIsOpen(!isOpen);
   };
+
 
   return (
     <div className="screen_container">
@@ -88,7 +105,7 @@ function VehicleList() {
 
       {isOpen && (
         <div>
-          <UpdateVehiclePopUp handleClose={togglePopUp} />
+          <UpdateVehiclePopUp handleClose={togglePopUp} vehicle={selectedVehicle} onUpdate={handleUpdate} />
         </div>
       )}
 
@@ -102,17 +119,17 @@ function VehicleList() {
 
       {showForm && (
         <div>
-          <AddVehicleForm />
+          <AddVehicleForm vehicleMakeMap={vehicleMakeMap} />
         </div>
       )}
 
       {error ? (
-        <div>{error}</div>
+        <div>{error.message}</div>
       ) : (
         <div className="screen_content">
           {vehicles.map((vehicle) => {
             return (
-              <div key={vehicle.id} className="card">
+              <div key={vehicle.vehicle_model_id} className="card">
                 <div className="image_postion">
                   <img
                     src={vehicle.image}
@@ -127,7 +144,7 @@ function VehicleList() {
                   >
                     delete
                   </i>
-                  <i className="material-icons" onClick={() => togglePopUp()}>
+                  <i className="material-icons" onClick={() => togglePopUp(vehicle)}>
                     edit
                   </i>
                 </div>

@@ -6,7 +6,12 @@ export default function Input(props) {
       <label>
         {props.label}
         <div>
-          <input type={props.type} placeholder={props.placeholder} value={props.value} onChange={props.onChange}/>
+          <input 
+          type={props.type} 
+          placeholder={props.placeholder} 
+          value={props.value} 
+          defaultValue={props.defaultValue}
+          onChange={props.onChange} />
         </div>
       </label>
     </>
