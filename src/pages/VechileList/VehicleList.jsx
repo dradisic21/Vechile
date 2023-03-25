@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { getAllVehicleData } from "../../Services/VehicleServices";
-import AddVehicleForm from "../VehicleForm/AddVehicleForm";
-import UpdateVehiclePopUp from "../UpdateVehicle/UpdateVehiclePopUp";
-import Button from "../../UI/Button/Button";
-import { deleteVehicle } from "../../Services/VehicleApi.js";
+import { getAllVehicleData } from "../../common/Services/VehicleServices";
+import { deleteVehicle } from "../../common/Services/VehicleApi";
+import { AddVehicleForm } from "../../components/VehicleForm";
+import { UpdateVehiclePopUp } from "../../components/UpdateVehicle";
+import { Button } from "../../components/UI";
 import "./VehicleList.css";
 
 function VehicleList() {

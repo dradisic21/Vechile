@@ -1,4 +1,5 @@
 import axios from "axios";
+import { HttpClient } from "./VehicleApi"
 import {storeNewVehicleModel, storeNewVehicle} from "./VehicleApi"
 
 const vehicleMakeMap = new Map();
@@ -25,19 +26,21 @@ function mapVehicleObjects(responseVehicleList) {
 
 // GET all vehicles
 export async function getAllVehicleData() {
-  const userToken = localStorage.getItem("userToken");
-  const requestOptions = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + userToken,
-    },
-  };
+  // const userToken = localStorage.getItem("userToken");
+  // const requestOptions = {
+  //   method: "GET",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     Authorization: "Bearer " + userToken,
+  //   },
+  // };
+
+  const api = HttpClient();
 
   const [vehicleMakeResponse, vehicleModelResponse, vehicleResponse] = await Promise.all([
-    axios.get("https://api.baasic.com/v1/vehicle-cro23/resources/VehicleMake", requestOptions),
-    axios.get("https://api.baasic.com/v1/vehicle-cro23/resources/VehicleModel", requestOptions),
-    axios.get("https://api.baasic.com/v1/vehicle-cro23/resources/Vehicle", requestOptions),
+   api.get("VehicleMake"),
+   api.get("VehicleModel"),
+   api.get("Vehicle"),
   ]);
 
   vehicleMakeResponse.data.item.forEach(make => vehicleMakeMap.set(make.id, make));
@@ -58,7 +61,7 @@ export async function getAllVehicleData() {
 }
 
 function findVehicleModel(modelName) {
-  let retVal = undefined;
+  let retVal = null;
   for (const [_key, val] of vehicleModelMap) {
     if (val.name === modelName) {
       retVal = val;
@@ -76,7 +79,7 @@ export function addNewVehicle(vehicleForm) {
 
   let existingVehicleModel = findVehicleModel(model);
 
-  if (existingVehicleModel === undefined) {
+  if (existingVehicleModel === null) {
     const newVehicleModel = { name: model, abbrv: model.substring(0,4) };
     existingVehicleModel = storeNewVehicleModel(newVehicleModel);
   }

@@ -38,7 +38,7 @@
     justify-content: center;
     padding-top: 30px;
 }
-.text-danger { 
+.error-message { 
     font-size: 13px;
     color: red;
     margin-left: 0;

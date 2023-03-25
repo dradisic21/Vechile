@@ -2,6 +2,7 @@ Technologies used by the application
 React,
 React Router,
 Axios,
+Mobx
 
 version of node and npm with which the application is launched
 NPM version 8.15.0 NODE version 16.17.0

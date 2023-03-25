@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import "./UpdateVehiclePopUp.css";
-import Input from "../../UI/Input/Input";
-import Button from "../../UI/Button/Button";
-import { updateVehicle } from "../../Services/VehicleApi";
+import { Input, Button } from "../../components/UI";
+import { updateVehicle } from "../../common/Services/VehicleApi";
 
 function UpdateVehiclePopUp(props) {
   const [year, setYear] = useState(props.vehicle.year || 0);

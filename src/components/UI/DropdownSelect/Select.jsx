@@ -1,6 +1,6 @@
 import "./Select.css";
 
-export default function Select(props) {
+export function Select(props) {
   let vehicleMakes = [];
 
   for (let [key, value] of props.vehicleMakeMap.entries()) { 

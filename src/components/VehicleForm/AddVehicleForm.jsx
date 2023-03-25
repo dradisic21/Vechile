@@ -1,9 +1,7 @@
-import React, {useState, useEffect} from "react";
+import {useState, useEffect} from "react";
 import "./AddVehicleForm.css";
-import Input from "../../UI/Input/Input";
-import Select from "../../UI/DropdownSelect/Select";
-import Button from "../../UI/Button/Button"
-import {addNewVehicle} from "../../Services/VehicleServices";
+import { Input, Select, Button } from "../UI";
+import { addNewVehicle } from "../../common/Services/VehicleServices";
 
 
 function AddVehicleForm(props) {
@@ -17,7 +15,6 @@ function AddVehicleForm(props) {
   const [image, setImage] = useState('');
   
  
-
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
   };
