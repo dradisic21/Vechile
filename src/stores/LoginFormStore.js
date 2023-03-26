@@ -5,6 +5,7 @@ class LoginFormStore {
   password = '';
   usernameError = '';
   passwordError = '';
+  error = '';
 
   constructor() {
     makeObservable(this, {
@@ -40,6 +41,10 @@ class LoginFormStore {
 
   validatePassword() {
     this.passwordError = this.password.trim() ? '' : 'Password is required';
+  }
+
+  setError(error) {
+    this.error = error;
   }
 }
 

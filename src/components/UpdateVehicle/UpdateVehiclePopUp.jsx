@@ -1,24 +1,27 @@
-import React, { useState } from "react";
 import "./UpdateVehiclePopUp.css";
 import { Input, Button } from "../../components/UI";
-import { updateVehicle } from "../../common/Services/VehicleApi";
+import { updateVehicle } from "../../common/Services/VehicleMethodsApi";
+import { observer } from "mobx-react";
+import updateVehicleStore from "../../stores/UpdateVehicleStore";
 
 function UpdateVehiclePopUp(props) {
-  const [year, setYear] = useState(props.vehicle.year || 0);
-  const [engine_type, setEngineType] = useState(props.vehicle.engine_type || "");
-  const [power, setPower] = useState(props.vehicle.power || 0);
-  const [transmission, setTransmission] = useState(props.vehicle.transmission || "");
-  const [color, setColor] = useState(props.vehicle.color || "");
-  const [image, setImage] = useState(props.vehicle.image || "");
+  const { vehicle } = props;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const updatedVehicle = await updateVehicle({...props.vehicle, year, engine_type, power, transmission, color, image});
-        props.onUpdate();
-      //   console.log(updatedVehicle, props.vehicle);
+      const updatedVehicle = await updateVehicle({
+        ...vehicle,
+        year: updateVehicleStore.year,
+        engine_type: updateVehicleStore.engineType,
+        power: updateVehicleStore.power,
+        transmission: updateVehicleStore.transmission,
+        color: updateVehicleStore.color,
+        image: updateVehicleStore.image,
+      });
+      props.onUpdate();
     } catch (error) {
-      console.log(error);
+      updateVehicleStore.setError(error);
     }
   };
 
@@ -33,48 +36,48 @@ function UpdateVehiclePopUp(props) {
             label="Year"
             type="number"
             name="year"
-            value={year}
-            onChange={(e) => setYear(e.target.value)}
+            value={updateVehicleStore.year}
+            onChange={(e) => updateVehicleStore.setYear(e.target.value)}
             placeholder="Enter year of manufacture"
           />
           <Input
             label="Engine type"
             type="text"
             name="engineType"
-            value={engine_type}
-            onChange={(e) => setEngineType(e.target.value)}
+            value={updateVehicleStore.engine_type}
+            onChange={(e) => updateVehicleStore.setEngineType(e.target.value)}
             placeholder="Enter engine type"
           />
           <Input
             label="Power"
             type="number"
             name="power"
-            value={power}
-            onChange={(e) => setPower(e.target.value)}
+            value={updateVehicleStore.power}
+            onChange={(e) => updateVehicleStore.setPower(e.target.value)}
             placeholder="Enter engine power"
           />
           <Input
             label="Transmission"
             type="text"
             name="transmission"
-            value={transmission}
-            onChange={(e) => setTransmission(e.target.value)}
+            value={updateVehicleStore.transmission}
+            onChange={(e) => updateVehicleStore.setTransmission(e.target.value)}
             placeholder="Enter transmission"
           />
           <Input
             label="Color"
             type="text"
             name="color"
-            value={color}
-            onChange={(e) => setColor(e.target.value)}
+            value={updateVehicleStore.color}
+            onChange={(e) => updateVehicleStore.setColor(e.target.value)}
             placeholder="Enter color"
           />
           <Input
             label="Image"
             type="text"
             name="image"
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
+            value={updateVehicleStore.image}
+            onChange={(e) => updateVehicleStore.setImage(e.target.value)}
             placeholder="Enter image link"
           />
           <div>
@@ -86,4 +89,4 @@ function UpdateVehiclePopUp(props) {
   );
 }
 
-export default UpdateVehiclePopUp;
+export default observer(UpdateVehiclePopUp);

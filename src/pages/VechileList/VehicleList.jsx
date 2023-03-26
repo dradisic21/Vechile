@@ -1,53 +1,46 @@
-import React, { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { getAllVehicleData } from "../../common/Services/VehicleServices";
-import { deleteVehicle } from "../../common/Services/VehicleApi";
+import { deleteVehicle } from "../../common/Services/VehicleMethodsApi";
 import { AddVehicleForm } from "../../components/VehicleForm";
 import { UpdateVehiclePopUp } from "../../components/UpdateVehicle";
+import vehicleListStore from "../../stores/VehicleListStore";
+import { observer } from "mobx-react";
 import { Button } from "../../components/UI";
 import "./VehicleList.css";
 
-function VehicleList() {
-  const [refresh, setRefresh] = useState(true);
-  const [vehicles, setVehicles] = useState([]);
-  const [selectedVehicle, setSelectedVehicle] = useState(null);
-  const [error, setError] = useState("");
-  const [showForm, setShowForm] = useState(false);
-  const [showScrollBtn, setShowScrollBtn] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const [vehicleMakeMap, setVehicleMakeMap] = useState({});
-  const [vehicleModelMap, setVehicleModelMap] = useState({});
+function VehicleList () {
 
   // get Vehicle
   useEffect(() => {
     const getVehicles = async () => {
       try {
         const vehicleData = await getAllVehicleData();
-        setVehicles(vehicleData.vehicles);
-        setVehicleMakeMap(vehicleData.vehicleMakeMap);
-        setVehicleModelMap(vehicleData.vehicleModelMap);
+        vehicleListStore.setVehicles(vehicleData.vehicles);
+        vehicleListStore.setVehicleMakeMap(vehicleData.vehicleMakeMap);
+        vehicleListStore.setVehicleModelMap(vehicleData.vehicleModelMap);
       } catch (err) {
-        setError(err);
+        vehicleListStore.setError(err);
       } finally {
-        setRefresh(false);
+        vehicleListStore.setRefresh(false);
       }
     };
-    if(refresh === true) {
+    if (vehicleListStore.refresh === true) {
       getVehicles();
     }
-  }, [refresh]);
+  });
 
     const handleUpdate = () => {
-      setRefresh(true);
+      vehicleListStore.setRefresh(true);
     } 
   // delete item
 
     const handleDelete = async (vehicleId) => {
       try {
         const response = await deleteVehicle(vehicleId);
-        console.log(response.data);
-        setVehicles(vehicles.filter(vehicle => vehicle.id !== vehicleId));
+        //console.log(response.data);
+        vehicleListStore.setVehicles(vehicleListStore.vehicles.filter(vehicle => vehicle.id !== vehicleId));
       } catch (error) {
-        console.error(error);
+        vehicleListStore.setError(error);
       }
     };
  
@@ -55,9 +48,9 @@ function VehicleList() {
   useEffect(() => {
     const handleScroll = () => {
       if (window.pageYOffset > 400) {
-        setShowScrollBtn(true);
+        vehicleListStore.setShowScrollBtn(true);
       } else {
-        setShowScrollBtn(false);
+        vehicleListStore.setShowScrollBtn(false);
       }
     };
 
@@ -78,13 +71,13 @@ function VehicleList() {
 
   // show the add form
   const showAddForm = () => {
-    setShowForm(!showForm);
+    vehicleListStore.setShowForm(!vehicleListStore.showForm);
   };
 
   // update item pop up
   const togglePopUp = (vehicle) => {
-    setSelectedVehicle(vehicle);
-    setIsOpen(!isOpen);
+    vehicleListStore.setSelectedVehicle(vehicle);
+    vehicleListStore.setIsOpen(!vehicleListStore.isOpen);
   };
 
 
@@ -103,13 +96,13 @@ function VehicleList() {
         </div>
       </div>
 
-      {isOpen && (
+      {vehicleListStore.isOpen && (
         <div>
-          <UpdateVehiclePopUp handleClose={togglePopUp} vehicle={selectedVehicle} onUpdate={handleUpdate} />
+          <UpdateVehiclePopUp handleClose={togglePopUp} vehicle={vehicleListStore.selectedVehicle} onUpdate={handleUpdate} />
         </div>
       )}
 
-      {showScrollBtn && (
+      {vehicleListStore.showScrollBtn && (
         <div className="scroll-position">
           <div className="scroll" onClick={scrollToTop}>
             <i className="material-icons">arrow_upward</i>
@@ -117,17 +110,17 @@ function VehicleList() {
         </div>
       )}
 
-      {showForm && (
+      {vehicleListStore.showForm && (
         <div>
-          <AddVehicleForm vehicleMakeMap={vehicleMakeMap} />
+          <AddVehicleForm vehicleMakeMap={vehicleListStore.vehicleMakeMap} />
         </div>
       )}
 
-      {error ? (
-        <div>{error.message}</div>
+      {vehicleListStore.error ? (
+        <div>{vehicleListStore.error.message}</div>
       ) : (
         <div className="screen_content">
-          {vehicles.map((vehicle) => {
+          {vehicleListStore.vehicles.map((vehicle) => {
             return (
               <div key={vehicle.vehicle_model_id} className="card">
                 <div className="image_postion">
@@ -185,4 +178,4 @@ function VehicleList() {
   );
 }
 
-export default VehicleList;
+export default observer(VehicleList);

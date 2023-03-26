@@ -1,6 +1,6 @@
 import axios from "axios";
 import { HttpClient } from "./VehicleApi"
-import {storeNewVehicleModel, storeNewVehicle} from "./VehicleApi"
+import {storeNewVehicleModel, storeNewVehicle} from "./VehicleMethodsApi"
 
 const vehicleMakeMap = new Map();
 const vehicleModelMap = new Map();
