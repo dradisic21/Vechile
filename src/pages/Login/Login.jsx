@@ -1,5 +1,5 @@
 import React from "react";
-import { login } from "../../common/Services/VehicleApi";
+import { login } from "../../common/Services/LoginApi";
 import { Input, Button } from "../../components/UI";
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react";
@@ -9,19 +9,18 @@ import "./Login.css";
 function Login() {
   const navigate = useNavigate();
 
-  const submitForm = (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
 
-    loginFormStore.validateUsername();
-    loginFormStore.validatePassword();
-    if (loginFormStore.isFormValid) {
-      login(loginFormStore.username, loginFormStore.password)
-        .then((response) => {
-          navigate("/vehiclelist");
-        })
-        .catch((err) => {
-          loginFormStore.setError(err);
-        });
+    loginFormStore.validateForm();
+
+    if (loginFormStore.validation.passes()) {
+      try {
+        const response = await login(loginFormStore.username, loginFormStore.password);
+        navigate("/vehiclelist");
+      } catch (err) {
+        loginFormStore.setError(err);
+      }
     }
   };
 
@@ -41,8 +40,8 @@ function Login() {
             value={loginFormStore.username}
             onChange={(e) => loginFormStore.setUsername(e.target.value)}
           />
-          {loginFormStore.usernameError && (
-            <div className="error-message">{loginFormStore.usernameError}</div>
+          {loginFormStore.validation.errors.has('username') && (
+            <div className="error-message">{loginFormStore.validation.errors.first('username')}</div>
           )}
           <Input
             label="Password"
@@ -52,8 +51,8 @@ function Login() {
             value={loginFormStore.password}
             onChange={(e) => loginFormStore.setPassword(e.target.value)}
           />
-          {loginFormStore.passwordError && (
-            <div className="error-message">{loginFormStore.passwordError}</div>
+          {loginFormStore.validation.errors.has('password') && (
+            <div className="error-message">{loginFormStore.validation.errors.first('password')}</div>
           )}
         </div>
         <div className="button-form">

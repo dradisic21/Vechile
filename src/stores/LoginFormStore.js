@@ -1,53 +1,45 @@
-import { makeObservable, observable, action, computed } from 'mobx';
+import { makeAutoObservable } from "mobx";
+import validator from "validatorjs";
 
 class LoginFormStore {
-  username = '';
-  password = '';
-  usernameError = '';
-  passwordError = '';
-  error = '';
+  username = "";
+  password = "";
+  error = "";
+  validation = new validator({}, {});
 
   constructor() {
-    makeObservable(this, {
-      username: observable,
-      password: observable,
-      usernameError: observable,
-      passwordError: observable,
-      isFormValid: computed,
-      setUsername: action,
-      setPassword: action,
-      validateUsername: action,
-      validatePassword: action,
-    });
+    makeAutoObservable(this);
   }
 
-  get isFormValid() {
-    return !this.usernameError && !this.passwordError;
+  setUsername(value) {
+    this.username = value;
   }
 
-  setUsername(username) {
-    this.username = username;
-    this.validateUsername();
+  setPassword(value) {
+    this.password = value;
   }
 
-  setPassword(password) {
-    this.password = password;
-    this.validatePassword();
+  setError(value) {
+    this.error = value;
   }
 
-  validateUsername() {
-    this.usernameError = this.username.trim() ? '' : 'Username is required';
-  }
+  async validateForm() {
+    const validationData = {
+      username: this.username,
+      password: this.password,
+    };
 
-  validatePassword() {
-    this.passwordError = this.password.trim() ? '' : 'Password is required';
-  }
+    const rules = {
+      username: "required",
+      password: "required|min:8",
+    };
 
-  setError(error) {
-    this.error = error;
+    this.validation = new validator(validationData, rules);
+
+    await this.validation.checkAsync();
+
+    return this.validation.errors;
   }
 }
 
-const loginFormStore = new LoginFormStore();
-
-export default loginFormStore;
+export default new LoginFormStore();

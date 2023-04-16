@@ -32,6 +32,7 @@ function VehicleList () {
     const handleUpdate = () => {
       vehicleListStore.setRefresh(true);
     } 
+    
   // delete item
 
     const handleDelete = async (vehicleId) => {

@@ -3,15 +3,18 @@ import { addNewVehicle } from "../../common/Services/VehicleServices";
 import addVehicleStore from "../../stores/AddVehicleStore";
 import { observer } from "mobx-react";
 import "./AddVehicleForm.css";
+
+
 function AddVehicleForm(props) {
  
   const handleOptionChange = (event) => {
     addVehicleStore.setSelectedOption(event.target.value);
   };
 
-  const handleSubmitForm = (e) => {
+  const handleSubmitForm = async (e) => {
     e.preventDefault();
     const formData = {
+      selectedOption: addVehicleStore.selectedOption,
       model: addVehicleStore.model,
       year: addVehicleStore.year,
       engine_type: addVehicleStore.engine_type,
@@ -20,7 +23,8 @@ function AddVehicleForm(props) {
       color: addVehicleStore.color,
       image: addVehicleStore.image,
     }
-  addNewVehicle(formData);
+    addNewVehicle(formData);
+    
   }
 
   return (
